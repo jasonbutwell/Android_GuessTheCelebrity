@@ -45,12 +45,12 @@
             android:textAlignment="center"
             android:padding="60dp"
             android:textSize="40dp"
-            tools:background="@android:color/holo_blue_light"
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
             android:layout_centerVertical="false"
-            android:visibility="invisible"
-            android:onClick="startQuiz" />
+            android:visibility="visible"
+            android:onClick="startQuiz"
+            android:background="@color/colorPrimary" />
 
         <ImageView
             android:layout_width="match_parent"
