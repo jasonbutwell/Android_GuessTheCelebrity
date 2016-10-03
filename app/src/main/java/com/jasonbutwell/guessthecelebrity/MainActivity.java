@@ -85,20 +85,31 @@ public class MainActivity extends AppCompatActivity {
     private void setAnswers() {
         answers.clear();
 
+        // get the correct answer location
         correctAnswerLocation = getRandomAnswerLocation();
 
-        String answerName = "";
+        // get the right celebrity name
+        String answerName = getCelebrityName(celebrityIndex);
+        String otherAnswer = "";
 
         for (int i=0; i < numberOfAnswers; i++ ) {
-            if ( i != correctAnswerLocation ) {
+            if ( i == correctAnswerLocation )             // If the index is equal to the answer location, just add in the answer
+                answers.add(answerName);
+            else {                                                          // if its not the correct answer location
+                otherAnswer = getCelebrityName(getRandomCelebrityIndex());  // get another random celebrity name
 
-                while ( answerName.isEmpty() || answerName.equals(getCelebrityName(celebrityIndex)) )
-                    answerName = getCelebrityName(getRandomCelebrityIndex());
+                // while the answer we have grabbed is the same as the answer, pick another one
+                while (otherAnswer.isEmpty() || otherAnswer.equals(answerName)) {
+                    otherAnswer = getCelebrityName(getRandomCelebrityIndex());
+                }
 
-                answers.add(getCelebrityName(getRandomCelebrityIndex()));
+                // Needed to check the other answer with the other answers we currently have
+                for (int j=i; j < answers.size(); j++ )                             // loop for size of answers so far
+                    while ( answers.get(j).equals(otherAnswer) )                    // if our other answer is already there
+                        otherAnswer = getCelebrityName(getRandomCelebrityIndex());  // get another one
+
+                answers.add(otherAnswer);       // Once we are happy add the other answer to the list
             }
-            else
-                answers.add(getCelebrityName(celebrityIndex));
         }
 
         setAnswerStatus();
