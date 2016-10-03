@@ -18,12 +18,39 @@
         android:id="@+id/whichTextView"
         android:textSize="18sp" />
 
+    <TextView
+        android:text="Time left: 60s"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/TimertextView"
+        android:textSize="18sp" />
+
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/whichTextView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
+
+        <Button
+            android:text="Let's Play!"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="fill"
+            android:id="@+id/playButton"
+            android:textAlignment="center"
+            android:padding="60dp"
+            android:textSize="40dp"
+            tools:background="@android:color/holo_blue_light"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="false"
+            android:visibility="invisible"
+            android:onClick="startQuiz" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -37,7 +64,6 @@
             android:layout_alignParentStart="true" />
 
         <Button
-            android:text="Selection1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="12dip"
@@ -49,7 +75,6 @@
             android:onClick="selectionMade" />
 
         <Button
-            android:text="Selection2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="12dip"
@@ -60,7 +85,6 @@
             android:onClick="selectionMade" />
 
         <Button
-            android:text="Selection3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="12dip"
@@ -71,7 +95,6 @@
             android:onClick="selectionMade" />
 
         <Button
-            android:text="Selection4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="12dip"
@@ -92,15 +115,5 @@
             android:textAlignment="center" />
 
     </GridLayout>
-
-    <TextView
-        android:text="Time left: 60s"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/TimertextView"
-        android:textSize="18sp" />
 
 </RelativeLayout>

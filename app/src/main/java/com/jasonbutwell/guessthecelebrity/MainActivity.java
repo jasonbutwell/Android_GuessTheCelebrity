@@ -43,27 +43,46 @@ public class MainActivity extends AppCompatActivity {
     int correctAnswers = 0;
     int answerTotal = 0;
 
-    String celebrityIndexURL = "";
-    String celebrityName = "";
     Bitmap celebrityImage = null;
 
-    public void selectionMade(View view ) {
-        //Log.i("result:", resultHTML);
-        checkAnswer(view);
-    }
+    boolean inPlay;
 
-    void setAnswerButtons() {
-        for (int i=0; i < numberOfAnswers; i++ ) {
-            answerButtons[i].setText(answers.get(i));
+    private void showStartButton( boolean showStatus ) {
+        Button showButton = (Button) findViewById(R.id.playButton);
+        ImageView imageView = (ImageView) findViewById(R.id.celebrityImageView);
+
+        if (showStatus == false)
+        {
+            showButton.setVisibility(View.INVISIBLE);
+            imageView.setVisibility(View.VISIBLE);
+        }
+        else {
+            showButton.setVisibility(View.VISIBLE);
+            imageView.setVisibility(View.INVISIBLE);
         }
     }
 
-    void setAnswerStatus() {
+    public void startQuiz( View view ) {
+        inPlay = true;
+        showStartButton( false );
+    }
+
+    public void selectionMade(View view ) {
+        if ( inPlay )
+            checkAnswer(view);
+    }
+
+    private void setAnswerButtons() {
+        for (int i=0; i < numberOfAnswers; i++ )
+            answerButtons[i].setText(answers.get(i));
+    }
+
+    private void setAnswerStatus() {
         TextView answerTotalView = (TextView)findViewById(R.id.QuestionNumberTextView);
         answerTotalView.setText("Celebrities correct so far: " + correctAnswers +" / " + answerTotal);
     }
 
-    void setAnswers() {
+    private void setAnswers() {
         answers.clear();
 
         correctAnswerLocation = getRandomAnswerLocation();
@@ -86,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         setAnswerButtons();
     }
 
-    void checkAnswer(View view) {
+    private void checkAnswer(View view) {
         String message = "";
 
         if (view.getTag().toString().equals(Integer.toString(correctAnswerLocation+1))) {
@@ -102,25 +121,25 @@ public class MainActivity extends AppCompatActivity {
         getNextCelebrity();
     }
 
-    int getRandomCelebrityIndex() {
+    private int getRandomCelebrityIndex() {
         Random rand = new Random();
         return rand.nextInt(maxNumberOfCelebrities);
     }
 
-    int getRandomAnswerLocation() {
+    private int getRandomAnswerLocation() {
         Random rand = new Random();
         return rand.nextInt(numberOfAnswers);
     }
 
-    String getCelebrityName( int index ) {
+    private String getCelebrityName( int index ) {
         return celebNames.get(index);
     }
 
-    String getCelebrityImageURL( int index ) {
+    private String getCelebrityImageURL( int index ) {
         return celebImages.get(index);
     }
 
-    boolean setViewImageBitmap(Bitmap bitmap) {
+    private boolean setViewImageBitmap(Bitmap bitmap) {
         boolean status = false;
 
         if ( bitmap != null ) {
@@ -182,6 +201,9 @@ public class MainActivity extends AppCompatActivity {
         answerButtons[1] = (Button)findViewById(R.id.button2);
         answerButtons[2] = (Button)findViewById(R.id.button3);
         answerButtons[3] = (Button)findViewById(R.id.button4);
+
+        inPlay = false;
+        showStartButton( true );
 
         task = new DownloadHTMLTask();
 
